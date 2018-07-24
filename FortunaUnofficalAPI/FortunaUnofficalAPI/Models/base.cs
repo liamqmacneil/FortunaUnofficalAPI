@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FortunaUnofficalAPI.Models
 {
-    class Base
+    public class Base
     {
         public string name;
         public string[] alias;

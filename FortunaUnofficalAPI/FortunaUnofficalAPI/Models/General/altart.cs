@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FortunaUnofficalAPI.Models.General
 {
-    class Altart
+    public class Altart
     {
         public string url;
         public string desc;

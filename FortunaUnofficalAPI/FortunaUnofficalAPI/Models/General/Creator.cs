@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FortunaUnofficalAPI.Models.General
 {
-    class Creator
+    public class Creator
     {
         public string creator;
         public string creator_url;

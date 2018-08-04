@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FortunaUnofficalAPI.Models.AI_Species_Fauna
+namespace FortunaUnofficalAPI.Models.SpeciesAiFauna
 {
     public class Gods
     {

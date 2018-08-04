@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FortunaUnofficalAPI.Models.AI_Species_Fauna
+namespace FortunaUnofficalAPI.Models
 {
-    public class Attributes_generic
+    public class AiContainer
     {
+
     }
 }

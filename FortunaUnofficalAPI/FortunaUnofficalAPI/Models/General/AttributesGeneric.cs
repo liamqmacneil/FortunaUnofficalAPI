@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace FortunaUnofficalAPI.Models
+namespace FortunaUnofficalAPI.Models.SpeciesAiFauna
 {
-    public class Base
+    public class AttributesGeneric
     {
         public string name;
         public string[] alias;

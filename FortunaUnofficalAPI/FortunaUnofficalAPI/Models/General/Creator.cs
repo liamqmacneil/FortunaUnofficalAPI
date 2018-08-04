@@ -8,7 +8,7 @@ namespace FortunaUnofficalAPI.Models.General
 {
     public class Creator
     {
-        public string creator;
+        public string creatorName;
         public string creator_url;
         public string rewriter;
         public string rewriter_url;

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace FortunaUnofficalAPI.Models.General
 {
-    public class generic_traits
+    public class GenericTraits
     {
         public TraitListItem[] traitList;
     }

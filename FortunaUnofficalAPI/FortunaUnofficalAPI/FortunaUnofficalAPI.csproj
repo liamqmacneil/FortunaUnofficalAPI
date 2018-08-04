@@ -195,22 +195,23 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Containers\AiContainer.cs" />
-    <Compile Include="Models\SpeciesAIFauna\AttributeAi.cs" />
-    <Compile Include="Models\SpeciesAIFauna\AttributeFauna.cs" />
-    <Compile Include="Models\SpeciesAIFauna\AttributeSpecies.cs" />
-    <Compile Include="Models\SpeciesAIFauna\Consorts.cs" />
-    <Compile Include="Models\SpeciesAIFauna\Gods.cs" />
-    <Compile Include="Models\SpeciesAIFauna\ShipInfo.cs" />
+    <Compile Include="Models\Containers\FaunaContainer.cs" />
+    <Compile Include="Models\SAF\AttributesAi.cs" />
+    <Compile Include="Models\SAF\AttributesFauna.cs" />
+    <Compile Include="Models\SAF\AttributesSpecies.cs" />
+    <Compile Include="Models\SAF\Attributes\AttributeConsorts.cs" />
+    <Compile Include="Models\SAF\Attributes\AttributeGods.cs" />
+    <Compile Include="Models\SAF\Attributes\AttributeShipInfo.cs" />
     <Compile Include="Models\General\AttributesGeneric.cs" />
-    <Compile Include="Models\General\AltArt.cs" />
-    <Compile Include="Models\General\Creator.cs" />
-    <Compile Include="Models\General\GenericTraits.cs" />
-    <Compile Include="Models\General\Stat.cs" />
-    <Compile Include="Models\General\Trait.cs" />
-    <Compile Include="Models\General\TraitListItem.cs" />
-    <Compile Include="Models\Planets\attributes_planet.cs" />
-    <Compile Include="Models\Planets\planet_inhabitant.cs" />
-    <Compile Include="Models\Planets\planet_inhabitant_main.cs" />
+    <Compile Include="Models\General\Attributes\AttributeAltArt.cs" />
+    <Compile Include="Models\General\Attributes\AttributeCreator.cs" />
+    <Compile Include="Models\General\Attributes\AttributeTraits.cs" />
+    <Compile Include="Models\General\Attributes\AttributeStat.cs" />
+    <Compile Include="Models\General\Attributes\AttributeTrait.cs" />
+    <Compile Include="Models\General\Attributes\AttributeTraitListItem.cs" />
+    <Compile Include="Models\Planets\AttributesPlanet.cs" />
+    <Compile Include="Models\Planets\Attributes\AttributePlanetInhabitant.cs" />
+    <Compile Include="Models\Planets\Attributes\AttributePlanetInhabitantMain.cs" />
     <Compile Include="Models\Containers\SpeciesContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

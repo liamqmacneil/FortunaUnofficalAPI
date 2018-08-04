@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FortunaUnofficalAPI.Models.General
 {
-    public class Trait
+    public class AttributeTrait
     {
         public string traitName;
         public string traitDesc;

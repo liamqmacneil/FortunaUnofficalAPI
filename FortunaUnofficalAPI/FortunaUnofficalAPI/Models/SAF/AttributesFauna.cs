@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FortunaUnofficalAPI.Models.SpeciesAiFauna
+namespace FortunaUnofficalAPI.Models.SAF
 {
     public class AttributesFauna
     {

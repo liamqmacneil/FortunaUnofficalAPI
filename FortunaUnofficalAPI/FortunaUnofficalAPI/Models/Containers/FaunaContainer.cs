@@ -5,8 +5,7 @@ using System.Web;
 
 namespace FortunaUnofficalAPI.Models.Containers
 {
-    public class AiContainer
+    public class FaunaContainer
     {
-
     }
 }

@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace FortunaUnofficalAPI.Models.General
 {
-    public class Creator
+    public class AttributeAltArt
     {
-        public string creatorName;
-        public string creator_url;
-        public string rewriter;
-        public string rewriter_url;
+        public string url;
+        public string desc;
     }
 }

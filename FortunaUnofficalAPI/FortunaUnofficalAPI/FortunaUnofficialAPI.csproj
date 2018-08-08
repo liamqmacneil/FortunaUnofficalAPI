@@ -195,6 +195,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Containers\AiContainer.cs" />
+    <Compile Include="Models\Containers\Container.cs" />
     <Compile Include="Models\Containers\FaunaContainer.cs" />
     <Compile Include="Models\SAF\AttributesAi.cs" />
     <Compile Include="Models\SAF\AttributesFauna.cs" />

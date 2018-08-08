@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FortunaUnofficalAPI.Models.General
+namespace FortunaUnofficialAPI.Models.General
 {
     public class AttributeCreator
     {

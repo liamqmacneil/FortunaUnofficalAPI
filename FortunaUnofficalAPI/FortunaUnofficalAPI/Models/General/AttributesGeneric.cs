@@ -1,10 +1,10 @@
-﻿using FortunaUnofficalAPI.Models.General;
+﻿using FortunaUnofficialAPI.Models.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FortunaUnofficalAPI.Models.General
+namespace FortunaUnofficialAPI.Models.General
 {
     public class AttributesGeneric
     {

@@ -1,16 +1,12 @@
-﻿using FortunaUnofficalAPI.Models.SpeciesAiFauna;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using FortunaUnofficialAPI.Models.General;
+using FortunaUnofficialAPI.Models.SAF;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FortunaUnofficalAPI.Models.Containers
+namespace FortunaUnofficialAPI.Models.Containers
 {
-    public class SpeciesContainer
+    public class SpeciesContainer : Container
     {
-        public int UrlId { get; set; }
-        public string Url { get; set; }
-        public AttributesGeneric BaseInfo { get; set; }
-        public AttributesSpecies AttributeSpecies { get; set; }
+        [Column(name:"species")]
+        public AttributesSpecies SpeciesAttributes { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FortunaUnofficalAPI.Models.Planets
+namespace FortunaUnofficialAPI.Models.Planets
 {
     public class Attributes_planet
     {

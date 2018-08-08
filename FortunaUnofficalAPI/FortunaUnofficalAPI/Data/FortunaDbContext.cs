@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.EntityFrameworkCore;
-using FortunaUnofficalAPI.Models;
+using FortunaUnofficialAPI.Models;
 
-namespace FortunaUnofficalAPI.Data
+namespace FortunaUnofficialAPI.Data
 {
     public class FortunaDbContext : DbContext
     {
-        public DbSet<String> SpeciesUrls {get; set;}
+        public DbSet<String> TestBe {get; set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

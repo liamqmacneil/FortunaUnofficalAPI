@@ -1,19 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using FortunaUnofficialAPI.Models.Containers;
+using FortunaUnofficialAPI.Models.General;
+using FortunaUnofficialAPI.Models.SAF;
 using Microsoft.EntityFrameworkCore;
-using FortunaUnofficialAPI.Models;
 
-namespace FortunaUnofficialAPI.Data
+namespace FortunaUnofficialAPI
 {
     public class FortunaDbContext : DbContext
     {
-        public DbSet<String> TestBe {get; set;}
+        private static bool _created = false;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionbuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=fortuna.db");
+            optionbuilder.UseSqlite(@"Data Source=./Fortuna.db");
         }
+
+        public FortunaDbContext()
+        {
+            if (!_created)
+            {
+                _created = true;
+                Database.EnsureDeleted();
+                Database.EnsureCreated();
+            }
+        }
+        public DbSet<AttributeCreator> AttributeCreator { get; set; }
+        public DbSet<AttributesGeneric> AttributesGeneric { get; set; }
+        public DbSet<AttributesSpecies> AttributesSpecies { get; set; }
+        public DbSet<SpeciesContainer> SpeciesContainers { get; set; }
     }
 }

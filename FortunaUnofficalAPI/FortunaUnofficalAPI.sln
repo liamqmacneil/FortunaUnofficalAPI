@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortunaUnofficalAPI", "FortunaUnofficalAPI\FortunaUnofficalAPI.csproj", "{2776FBF5-B19A-4D3F-ACB1-D0AFCAAF657B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortunaUnofficialAPI", "FortunaUnofficalAPI\FortunaUnofficialAPI.csproj", "{2776FBF5-B19A-4D3F-ACB1-D0AFCAAF657B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

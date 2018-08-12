@@ -102,8 +102,14 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite-net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlite-net-pcl.1.4.118\lib\netstandard1.1\SQLite-net.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_green, Version=1.1.11.121, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.11\lib\net45\SQLitePCLRaw.batteries_green.dll</HintPath>
@@ -170,9 +176,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -197,11 +200,13 @@
     <Compile Include="Models\Containers\AiContainer.cs" />
     <Compile Include="Models\Containers\Container.cs" />
     <Compile Include="Models\Containers\FaunaContainer.cs" />
+    <Compile Include="Models\General\Attributes\AttributeRewriter.cs" />
     <Compile Include="Models\SAF\AttributesAi.cs" />
     <Compile Include="Models\SAF\AttributesFauna.cs" />
     <Compile Include="Models\SAF\AttributesSpecies.cs" />
     <Compile Include="Models\SAF\Attributes\AttributeConsorts.cs" />
     <Compile Include="Models\SAF\Attributes\AttributeGods.cs" />
+    <Compile Include="Models\SAF\Attributes\AttributePlanet.cs" />
     <Compile Include="Models\SAF\Attributes\AttributeShipInfo.cs" />
     <Compile Include="Models\General\AttributesGeneric.cs" />
     <Compile Include="Models\General\Attributes\AttributeAltArt.cs" />

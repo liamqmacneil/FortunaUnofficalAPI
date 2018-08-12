@@ -6,7 +6,6 @@ namespace FortunaUnofficialAPI.Models.Containers
 {
     public class SpeciesContainer : Container
     {
-        [Column(name:"species")]
         public AttributesSpecies SpeciesAttributes { get; set; }
     }
 }

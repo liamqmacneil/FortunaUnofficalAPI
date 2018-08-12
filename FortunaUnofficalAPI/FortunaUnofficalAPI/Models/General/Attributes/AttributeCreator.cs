@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +11,11 @@ namespace FortunaUnofficialAPI.Models.General
 {
     public class AttributeCreator
     {
-        public string creatorName;
-        public string creator_url;
-        public string rewriter;
-        public string rewriter_url;
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        [JsonIgnore]
+        public Guid Id { get; set; }
+        public string CreatorName { get; set; }
+        public string CreatorUrl { get; set; }
     }
 }

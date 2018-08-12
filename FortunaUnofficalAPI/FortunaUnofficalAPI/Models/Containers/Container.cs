@@ -1,4 +1,5 @@
 ﻿using FortunaUnofficialAPI.Models.General;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,12 +11,11 @@ namespace FortunaUnofficialAPI.Models.Containers
 {
     public class Container
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        [Column(name:"id")]
-        public int Id { get; set; }
-        [Column(name:"url")]
+        [JsonIgnore]
+        public Guid Id { get; set; }
         public string Url { get; set; }
-        [Column(name:"baseInfo")]
-        public AttributesGeneric BaseInfo { get; set; }
+        public AttributesGeneric GenericAttributes { get; set; }
     }
 }

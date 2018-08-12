@@ -8,7 +8,8 @@ namespace FortunaUnofficialAPI.Models.General
 {
     public class AttributeAltArt
     {
-        public string url;
-        public string desc;
+        public string Url { get; set; }
+        public string Description { get; set; }
+        public AttributeCreator AltArtCreator { get; set; }
     }
 }

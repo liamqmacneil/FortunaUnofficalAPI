@@ -24,25 +24,7 @@ namespace FortunaUnofficialAPI.Models.General
 
         public string Alias { get; set; }
 
-        [NotMapped]
-        public List<AttributeAltArt> AltArt { get; set; }
-
-        [JsonIgnore]
-        public string SearlizedAltArt {
-            get
-            {
-                return AltArt == null || !AltArt.Any()
-                    ? null
-                    : JsonConvert.SerializeObject(AltArt);
-            }
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                    AltArt.Clear();
-                else
-                    AltArt = JsonConvert.DeserializeObject<List<AttributeAltArt>>(value);
-            }
-        }
+        public ICollection<AttributeAltArt> AltArt { get; set; }
 
         public AttributeCreator ArticleCreator { get; set; }
         public AttributeRewriter ArticleRewriter { get; set; }

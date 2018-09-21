@@ -193,6 +193,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\UpdateController.cs" />
+    <Compile Include="Data\DatabaseBuilder.cs" />
     <Compile Include="Data\FortunaDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

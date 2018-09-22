@@ -27,6 +27,9 @@ namespace FortunaUnofficialAPI
         public DbSet<AttributeCreator> AttributeCreator { get; set; }
         public DbSet<AttributesGeneric> AttributesGeneric { get; set; }
         public DbSet<AttributesSpecies> AttributesSpecies { get; set; }
+
         public DbSet<SpeciesContainer> SpeciesContainers { get; set; }
+        public DbSet<FaunaContainer> FaunaContainers { get; set; }
+        public DbSet<AiContainer> AiContainers { get; set; }
     }
 }

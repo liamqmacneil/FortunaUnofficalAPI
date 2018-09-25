@@ -12,18 +12,29 @@ namespace FortunaUnofficalAPI.Data
     public class DatabaseBuilder
     {
         private static readonly string SpeciesNameUrlPattern = "(\\<a href=\"([a-zA-Z0-9\\-]*)\"\\>)";
+
         private static readonly string EntryNameSectionPattern = "((\\<div id\\=\\\"commonentryheader\\\"\\>)[\\s\\S]+?(\\<\\/div\\>)[\\s\\S]+?(<\\/div>))";
         private static readonly string EntryNamePattern = "<u>(.+?)<";
         private static readonly string EntryAltNamePattern = "<h4>(.+?)<\\/h4>";
+
         private static readonly string EntryMainArtPattern = "<img .+? src=\"(.+?)\">";
+
         private static readonly string EntryQuotePattern = "<div id=\"entryquickinfoimgtext\">[\\s\\S]+?<i>(.+?)<";
+
         private static readonly string EntryMainArtCreatorUrlPattern = "<div id=\"entryquickinfoimgtext\">[\\s\\S]+?<p>.+?<a href=\"(.+?)\"";
         private static readonly string EntryMainArtCreatorPattern = "<div id=\"entryquickinfoimgtext\">[\\s\\S]+?<p>.+?>(.+?)<";
+
         private static readonly string EntryStatsSectionPattern = "<div id=\"entryquickinfostats\">[\\s\\S]+?<\\/div>";
         private static readonly string EntryStatsPattern = "(<b>.+?<\\/b>)";
         private static readonly string EntryGenericInfoSectionPattern = "<div class=\"entryquickinfoect\">[\\s\\S]+?<h5>Patrons and Gods<\\/h5>";
 
         private static readonly string EntryGodsPatronSectionPattern = "<h5>Patrons and Gods<\\/h5>[\\s\\S]+?<\\/div>";
+        private static readonly string EntryBeliefPattern = "<p>([\\s\\S]+?)<\\/p>";
+        private static readonly string EntryPatronGodCreatorPattern = "<\\/b>([\\s\\S]+?)<br>";
+
+        private static readonly string EntryCreatorLinkPattern = "<\\/b><a href=\"([\\s\\S]+?)\"";
+        private static readonly string EntryCreatorNamePattern = "<\\/b><a href=\"[\\s\\S] +? \">([\\s\\S]+?)<";
+
 
         public static void BuildSpeciesDatabase()
         {

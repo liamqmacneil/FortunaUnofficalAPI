@@ -192,9 +192,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\SpeciesController.cs" />
     <Compile Include="Controllers\UpdateController.cs" />
     <Compile Include="Data\DatabaseBuilder.cs" />
     <Compile Include="Data\FortunaDbContext.cs" />
+    <Compile Include="Data\WebRegexPatterns.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebRegexPatterns.resx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -233,6 +239,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\WebRegexPatterns.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WebRegexPatterns.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

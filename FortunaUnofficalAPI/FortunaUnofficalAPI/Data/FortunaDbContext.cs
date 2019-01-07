@@ -10,10 +10,9 @@ namespace FortunaUnofficialAPI
     {
         private static bool _created = false;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionbuilder)
-        {
-            optionbuilder.UseSqlite(@"Data Source=./Fortuna.db");
-        }
+        public static bool skip = false;
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionbuilder) => optionbuilder.UseSqlite(@"Data Source=./Fortuna.db");
 
         public FortunaDbContext()
         {
@@ -24,6 +23,8 @@ namespace FortunaUnofficialAPI
                 Database.EnsureCreated();
             }
         }
+
+        public DbSet<AttributeAltArt> AttributeAltArts { get; set; }
         public DbSet<AttributeCreator> AttributeCreator { get; set; }
         public DbSet<AttributesGeneric> AttributesGeneric { get; set; }
         public DbSet<AttributesSpecies> AttributesSpecies { get; set; }

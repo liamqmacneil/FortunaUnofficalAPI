@@ -1,4 +1,5 @@
-﻿using FortunaUnofficialAPI.Models.SAF;
+﻿using FortunaUnofficialAPI.Models.General;
+using FortunaUnofficialAPI.Models.SAF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +10,6 @@ namespace FortunaUnofficialAPI.Models.Containers
 {
     public class FaunaContainer : Container
     {
-        [Column(name:"fauna")]
         public AttributesFauna FaunaAttributes { get; set; }
     }
 }

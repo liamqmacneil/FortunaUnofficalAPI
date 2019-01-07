@@ -10,10 +10,15 @@ namespace FortunaUnofficialAPI.Models.SAF
 {
     public class AttributesSpecies
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public AttributesSpecies()
+        {
+            Id = Guid.NewGuid();
+        }
+
         [Key]
         [JsonIgnore]
         public Guid Id { get; set; }
+
         public string LifeSpan { get; set; }
         public string Diet { get; set; }
         public string SocialClass { get; set; }

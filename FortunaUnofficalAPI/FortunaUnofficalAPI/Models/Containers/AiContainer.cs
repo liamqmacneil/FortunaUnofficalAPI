@@ -1,4 +1,6 @@
-﻿using FortunaUnofficialAPI.Models.SAF;
+﻿using FortunaUnofficialAPI.Models.General;
+using FortunaUnofficialAPI.Models.SAF;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +11,6 @@ namespace FortunaUnofficialAPI.Models.Containers
 {
     public class AiContainer : Container
     {
-        [Column(name:"ai")]
         public AttributesAi AiAttributes { get; set; }
     }
 }

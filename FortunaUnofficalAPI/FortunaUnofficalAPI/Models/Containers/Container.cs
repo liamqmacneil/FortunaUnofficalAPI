@@ -11,11 +11,17 @@ namespace FortunaUnofficialAPI.Models.Containers
 {
     public class Container
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Container()
+        {
+            Id = Guid.NewGuid();
+        }
+
         [Key]
         [JsonIgnore]
         public Guid Id { get; set; }
+
         public string Url { get; set; }
-        public AttributesGeneric GenericAttributes { get; set; }
+        public string DatabaseName { get; set; }
+        public AttributesGeneric AttributesGeneric { get; set; }
     }
 }

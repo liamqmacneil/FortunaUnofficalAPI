@@ -8,7 +8,14 @@ namespace FortunaUnofficialAPI.Models.General
 {
     public class AttributeTrait
     {
-        public string traitName;
-        public string traitDesc;
+        public AttributeTrait()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        public Guid Id { get; set; }
+
+        public string TraitName { get; set; }
+        public string TraitDesc { get; set; }
     }
 }

@@ -7,6 +7,6 @@ namespace FortunaUnofficialAPI.Models.General
 {
     public class AttributeTraits
     {
-        public AttributeTraitListItem[] traitList;
+        public AttributeTraitListItem[] traitList; //Traits
     }
 }

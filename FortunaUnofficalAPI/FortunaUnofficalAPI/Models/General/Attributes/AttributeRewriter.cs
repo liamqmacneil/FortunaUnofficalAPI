@@ -10,10 +10,15 @@ namespace FortunaUnofficalAPI.Models.General
 {
     public class AttributeRewriter
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public AttributeRewriter()
+        {
+            Id = Guid.NewGuid();
+        }
+
         [Key]
         [JsonIgnore]
         public Guid Id { get; set; }
+
         public string Rewriter { get; set; }
         public string RewriterUrl { get; set; }
     }

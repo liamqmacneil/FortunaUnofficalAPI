@@ -12,6 +12,7 @@ using System.Web.Http;
 
 namespace FortunaUnofficialAPI.Controllers
 {
+    [Route("api/[controller]")]
     public class UpdateController : ApiController
     {
          /*public SpeciesContainer Test()
@@ -31,8 +32,8 @@ namespace FortunaUnofficialAPI.Controllers
                  return ResponseSpeciesContainer;
              }
          }*/
-        
-        
+
+
         /*public async Task<IHttpActionResult> UpdateSpecies()
         {
             WebClient client = new WebClient();

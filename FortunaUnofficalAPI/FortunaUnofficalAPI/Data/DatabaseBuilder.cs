@@ -1,4 +1,7 @@
-﻿using FortunaUnofficialAPI.Models.Containers;
+﻿using FortunaUnofficialAPI;
+using FortunaUnofficialAPI.Models.Containers;
+using FortunaUnofficialAPI.Models.General;
+using FortunaUnofficialAPI.Models.SAF;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,74 +14,190 @@ namespace FortunaUnofficalAPI.Data
 {
     public class DatabaseBuilder
     {
-        private static readonly string SpeciesNameUrlPattern = "(\\<a href=\"([a-zA-Z0-9\\-]*)\"\\>)";
-
-        private static readonly string EntryNameSectionPattern = "((\\<div id\\=\\\"commonentryheader\\\"\\>)[\\s\\S]+?(\\<\\/div\\>)[\\s\\S]+?(<\\/div>))";
-        private static readonly string EntryNamePattern = "<u>(.+?)<";
-        private static readonly string EntryAltNamePattern = "<h4>(.+?)<\\/h4>";
-
-        private static readonly string EntryMainArtPattern = "<img .+? src=\"(.+?)\">";
-
-        private static readonly string EntryQuotePattern = "<div id=\"entryquickinfoimgtext\">[\\s\\S]+?<i>(.+?)<";
-
-        private static readonly string EntryMainArtCreatorUrlPattern = "<div id=\"entryquickinfoimgtext\">[\\s\\S]+?<p>.+?<a href=\"(.+?)\"";
-        private static readonly string EntryMainArtCreatorPattern = "<div id=\"entryquickinfoimgtext\">[\\s\\S]+?<p>.+?>(.+?)<";
-
-        private static readonly string EntryStatsSectionPattern = "<div id=\"entryquickinfostats\">[\\s\\S]+?<\\/div>";
-        private static readonly string EntryStatsPattern = "(<b>.+?<\\/b>)";
-        private static readonly string EntryGenericInfoSectionPattern = "<div class=\"entryquickinfoect\">[\\s\\S]+?<h5>Patrons and Gods<\\/h5>";
-
-        private static readonly string EntryGodsPatronSectionPattern = "<h5>Patrons and Gods<\\/h5>[\\s\\S]+?<\\/div>";
-        private static readonly string EntryBeliefPattern = "<p>([\\s\\S]+?)<\\/p>";
-        private static readonly string EntryPatronGodCreatorPattern = "<\\/b>([\\s\\S]+?)<br>";
-
-        private static readonly string EntryCreatorLinkPattern = "<\\/b><a href=\"([\\s\\S]+?)\"";
-        private static readonly string EntryCreatorNamePattern = "<\\/b><a href=\"[\\s\\S] +? \">([\\s\\S]+?)<";
-
+        internal static FortunaDbContext db_ = new FortunaDbContext();
 
         public static void BuildSpeciesDatabase()
         {
+            if (FortunaDbContext.skip == true) { return; }
+
             WebClient client = new WebClient();
             var SpeciesUrls = new List<string>();
-
+            Debug.WriteLine("Start species page download");
             string downloadedString = client.DownloadString("https://cosmosdex.com/cosmosdex/species/");
-            foreach (Match m in Regex.Matches(downloadedString, SpeciesNameUrlPattern))
+            Debug.WriteLine("Start species processing");
+
+            foreach (Match m in Regex.Matches(downloadedString, WebRegexPatterns.SpeciesNameUrlPattern))
             {
-                SpeciesContainer speciesContainer = new SpeciesContainer(); 
-                var speciesName = Regex.Match(m.Value, "(\"([a-zA-Z0-9-]*))").Value.Remove(0, 1);
+                AttributesGeneric attributesGeneric = new AttributesGeneric() { MainArtCreator = new AttributeCreator() };
+                AttributesSpecies attributesSpecies = new AttributesSpecies();
+
+                string speciesName = Regex.Match(m.Value, "(\"([a-zA-Z0-9-]*))").Value.Remove(0, 1); //Grabs species name
+
+                Debug.WriteLine(speciesName);
+
                 if (speciesName == "isment")
                 {
                     speciesName = "NULLENTITY"; //Special case for isment 404 gimic
                 }
+
                 var toProcess = client.DownloadString("https://cosmosdex.com/cosmosdex/species/" + speciesName);
-                var EntryNameSection = Regex.Match(toProcess, EntryNameSectionPattern); //Name / Alias processing
-                if (EntryNameSection.Success == true)
-                {
-                    speciesContainer.GenericAttributes.Name = MatchEntryName(EntryNameSection.Value);
-                    speciesContainer.GenericAttributes.Alias = MatchEntryAltName(EntryNameSection.Value);
-                }
 
+                BuildEntryName(ref attributesGeneric, toProcess);
+                BuildEntryMainArt(ref attributesGeneric, toProcess);
+                BuildEntryQuote(ref attributesGeneric, toProcess);
+                BuildEntryCreator(ref attributesGeneric, toProcess);
+                BuildEntryAltArt(attributesGeneric, toProcess);
+                
 
+                //"http://cosmosdex.com"+speciesName, speciesName, attributesGeneric, attributesSpecies
+
+                SpeciesContainer speciesContainer = new SpeciesContainer() {
+                    Url = "http://cosmosdex.com" + speciesName,
+                    DatabaseName = speciesName,
+                    AttributesGeneric = attributesGeneric,
+                    AttributesSpecies = attributesSpecies
+                };
 
                 
+
+                db_.SpeciesContainers.Add(speciesContainer);
+                
             }
-            return;
+            db_.SaveChanges();
+            var test = db_.SpeciesContainers.Where(x => x.DatabaseName == "fhelzo").FirstOrDefault();
         }
 
-        private static string MatchEntryName(string toProcess)
+
+        internal static void BuildEntryName(ref AttributesGeneric attributes, string source)
         {
-            var nameResult = Regex.Match(toProcess, EntryNamePattern);
-            if (nameResult.Success == false) return null;
+            Debug.WriteLine("Processing entry name");
+            var EntryNameSection = Regex.Match(source, WebRegexPatterns.EntryNameSectionPattern);
+            Debug.Write(".");
+            if (EntryNameSection.Success == true)
+            {
+                Debug.Write(".");
+                attributes.Name = EntryNameSection.Groups[1].Value;
 
-            return nameResult.Groups[1].Value;
+                attributes.Alias = EntryNameSection.Groups[2].Value;
+
+            }else
+            {
+                throw new System.ArgumentNullException("Entry cannot be missing a name");
+            }
+            Debug.Write(".");
         }
 
-        private static string MatchEntryAltName(string toProcess)
+        internal static void BuildEntryMainArt(ref AttributesGeneric attributes, string source)
         {
-            var nameResult = Regex.Match(toProcess, EntryAltNamePattern);
-            if (nameResult.Success == false) return null;
+            Debug.WriteLine("Processing entry main art");
+            var EntryMainArtSection = Regex.Match(source, WebRegexPatterns.EntryMainArtPattern);
+            var EntryMainArtCreatorSection = Regex.Match(source, WebRegexPatterns.EntryMainArtCreatorPattern);
+            Debug.Write(".");
+            if (EntryMainArtSection.Success == true)
+            {
+                Debug.Write(".");
+                attributes.MainArt = "https://cosmosdex.com"+EntryMainArtSection.Groups[1].Value;
+                attributes.MainArtCreator.CreatorUrl = EntryMainArtCreatorSection.Groups[1].Value;
+                attributes.MainArtCreator.CreatorName = EntryMainArtCreatorSection.Groups[2].Value;
 
-            return nameResult.Groups[1].Value;
+            }else
+            {
+                Debug.Write(".");
+                attributes.MainArt = "https://cosmosdex.com/images/deximages/species/display/fhelzo.png";
+                attributes.MainArtCreator.CreatorName = null;
+                attributes.MainArtCreator.CreatorUrl = null;
+            }
+            Debug.Write(".");
         }
+
+        internal static void BuildEntryQuote(ref AttributesGeneric attributes, string source)
+        {
+            Debug.WriteLine("Processing entry quote");
+            var EntryQuoteSection = Regex.Match(source, WebRegexPatterns.EntryQuotePattern);
+            Debug.Write(".");
+            if (EntryQuoteSection.Success == true)
+            {
+                Debug.Write(".");
+                attributes.Quote = EntryQuoteSection.Groups[1].Value;
+            }
+            else
+            {
+                throw new System.ArgumentNullException("Entry cannot be missing a quote");
+            }
+            Debug.Write(".");
+        }
+
+        internal static void BuildEntryCreator(ref AttributesGeneric attributes, string source)
+        {
+            Debug.WriteLine("Processing entry creator");
+            var EntryCreatorSectionName = Regex.Match(source, WebRegexPatterns.EntryCreatorNamePattern);
+            var EntryCreatorSectionUrl = Regex.Match(source, WebRegexPatterns.EntryCreatorLinkPattern);
+            Debug.Write(".");
+            if (EntryCreatorSectionName.Success == true)
+            {
+                Debug.Write(".");
+                attributes.ArticleCreator.CreatorName = EntryCreatorSectionName.Groups[1].Value;
+            }else
+            {
+                Debug.Write(".");
+                EntryCreatorSectionName = Regex.Match(source, WebRegexPatterns.EntryCreatorNameFallbackPattern);
+                if (EntryCreatorSectionName.Success != true) throw new System.ArgumentNullException("Entry must have a creator??");
+                attributes.ArticleCreator.CreatorUrl = EntryCreatorSectionUrl.Groups[1].Value;
+            }
+            Debug.Write(".");
+
+            Debug.WriteLine(EntryCreatorSectionUrl.Groups[1].Value);
+            if (EntryCreatorSectionUrl.Success == false) { return; }
+            Debug.Write(".");
+            attributes.ArticleCreator.CreatorUrl = EntryCreatorSectionUrl.Groups[1].Value;
+        }
+
+        internal static void BuildEntryAltArt(AttributesGeneric attributes, string source)
+        {
+            Debug.WriteLine("Processing entry alt art");
+            var EntryAltArts = Regex.Matches(source, WebRegexPatterns.EntryAltArtPattern);
+            foreach(Match m in EntryAltArts)
+            {
+                Debug.Write(".");
+                AttributeAltArt altArt = new AttributeAltArt
+                {
+                    Url = "https://www.cosmosdex.com"+m.Groups[1].Value,
+                    Description = m.Groups[2].Value,
+                    HostAttribute = attributes.Id
+                };
+                altArt.AltArtCreator.CreatorUrl = m.Groups[3].Value;
+                altArt.AltArtCreator.CreatorName = m.Groups[4].Value;
+                db_.AttributeAltArts.Add(altArt);
+            }
+            Debug.WriteLine("");
+            db_.SaveChanges();
+        }
+
+        internal static void BuildEntryStats(ref AttributesGeneric attributes, string source)
+        {
+            Debug.WriteLine("Processing entry stats");
+            var EntryStats = Regex.Matches(source, WebRegexPatterns.EntryStatsPattern);
+            Stat stat = new Stat();
+            foreach (Match m in EntryStats)
+            {
+                Debug.Write(".");
+                //stat.S = m.Groups[1].Value; //cast? fuck it? idk
+            }
+        }
+
+        internal static void BuildSpecies()
+        {
+
+        }
+
+        internal static void BuildEntryBlurb(ref AttributesGeneric attributes, string source)
+        {
+            Debug.WriteLine("Processing entry blurb...");
+        }
+
+
+
+
+
     }
 }

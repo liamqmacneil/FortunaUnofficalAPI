@@ -6,6 +6,7 @@ using FortunaUnofficialAPI.Models.SAF;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Web.Http;
@@ -19,7 +20,9 @@ namespace FortunaUnofficialAPI
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            Debug.WriteLine("Database build start");
             DatabaseBuilder.BuildSpeciesDatabase();
+            Debug.WriteLine("Database build end");
 
             // Web API routes
             config.MapHttpAttributeRoutes();

@@ -169,7 +169,7 @@ namespace FortunaUnofficalAPI.Data {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;(.+?)&lt;\/b&gt;&lt;\/li&gt;.
+        ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;(.+?([0-9]+?))&lt;\/b&gt;&lt;\/li&gt;.
         /// </summary>
         internal static string EntryStatsPattern {
             get {

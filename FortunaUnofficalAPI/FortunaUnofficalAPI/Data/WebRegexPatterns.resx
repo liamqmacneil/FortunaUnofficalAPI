@@ -164,7 +164,7 @@
     <comment>Pattern for the quote of this entry</comment>
   </data>
   <data name="EntryStatsPattern" xml:space="preserve">
-    <value>&lt;li&gt;&lt;b&gt;(.+?)&lt;\/b&gt;&lt;\/li&gt;</value>
+    <value>&lt;li&gt;&lt;b&gt;(.+?([0-9]+?))&lt;\/b&gt;&lt;\/li&gt;</value>
     <comment>Pattern fot the individual stats</comment>
   </data>
   <data name="EntryStatsSectionPattern" xml:space="preserve">

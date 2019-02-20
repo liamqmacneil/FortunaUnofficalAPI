@@ -46,13 +46,13 @@ namespace FortunaUnofficalAPI.Data
                 BuildEntryMainArt(ref attributesGeneric, toProcess);
                 BuildEntryQuote(ref attributesGeneric, toProcess);
                 BuildEntryCreator(ref attributesGeneric, toProcess);
+                BuildEntryStats(ref attributesGeneric, toProcess);
                 BuildEntryAltArt(attributesGeneric, toProcess);
-                
 
                 //"http://cosmosdex.com"+speciesName, speciesName, attributesGeneric, attributesSpecies
 
                 SpeciesContainer speciesContainer = new SpeciesContainer() {
-                    Url = "http://cosmosdex.com" + speciesName,
+                    Url = "http://cosmosdex.com/" + speciesName,
                     DatabaseName = speciesName,
                     AttributesGeneric = attributesGeneric,
                     AttributesSpecies = attributesSpecies
@@ -61,10 +61,8 @@ namespace FortunaUnofficalAPI.Data
                 
 
                 db_.SpeciesContainers.Add(speciesContainer);
-                
             }
             db_.SaveChanges();
-            var test = db_.SpeciesContainers.Where(x => x.DatabaseName == "fhelzo").FirstOrDefault();
         }
 
 
@@ -178,11 +176,29 @@ namespace FortunaUnofficalAPI.Data
             Debug.WriteLine("Processing entry stats");
             var EntryStats = Regex.Matches(source, WebRegexPatterns.EntryStatsPattern);
             Stat stat = new Stat();
+            int[] statArray = new int[6];
+            int step = 0;
             foreach (Match m in EntryStats)
             {
                 Debug.Write(".");
-                //stat.S = m.Groups[1].Value; //cast? fuck it? idk
+                Debug.Write(m.Groups[2].Value);
+                if (Int32.TryParse(m.Groups[2].Value, out int statValue))
+                {
+                    statArray[step] = statValue;
+                }else
+                {
+                    statArray[step] = 0;
+                }
+                step++;
             }
+            stat.S = statArray[0];
+            stat.I = statArray[1];
+            stat.C = statArray[2];
+            stat.E = statArray[3];
+            stat.A = statArray[4];
+            stat.L = statArray[5];
+
+            attributes.Stats = stat;
         }
 
         internal static void BuildSpecies()

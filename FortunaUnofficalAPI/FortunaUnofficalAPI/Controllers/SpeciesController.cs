@@ -24,7 +24,7 @@ namespace FortunaUnofficalAPI.Controllers
         }
 
         [Route("api/species/test")]
-        public IHttpActionResult test()
+        public IHttpActionResult Test()
         {
             return Ok("AAAAAAAAAA");
         }
@@ -45,6 +45,7 @@ namespace FortunaUnofficalAPI.Controllers
                 .Include(x => x.AttributesSpecies)
                 .Include(x => x.AttributesGeneric.ArticleCreator)
                 .Include(x => x.AttributesGeneric.MainArtCreator)
+                .Include(x => x.AttributesGeneric.Stats)
                 .FirstOrDefault();
 
             returnSpecies.AttributesGeneric.AltArt = _db.AttributeAltArts.Where(x => x.HostAttribute == returnSpecies.AttributesGeneric.Id).Include(x => x.AltArtCreator).ToArray();
